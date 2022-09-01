@@ -1,0 +1,81 @@
+.Search_Box_Wrapper{
+    position: relative;
+    box-sizing: border-box;
+    padding: 8px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(221, 224, 228);
+    border-radius: 4px;
+    width: 228px;
+    margin: 0px;
+    text-align: left;
+
+    .Search_Box{
+        justify-content: flex-start;
+
+        .Input_Search_Box{
+            font-family: "Graphik Web Regular", sans-serif;
+            border: none;
+            margin-left: 8px;
+            color: rgb(83, 91, 98);
+            font-size: 13px;
+            background-color: rgb(255, 255, 255);
+            vertical-align: top;
+            width: calc(100% - 41px);
+            outline:none;
+        }
+    }
+}
+
+.DropDown_List_Wrapper{
+    position: absolute;
+    max-height: 264px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 4;
+    background-color: rgb(255, 255, 255);
+    border-radius: 0px 0px 4px 4px;
+    box-shadow: rgba(0,0,0,0.15) 0px 4px 16px 0px, rgba(0,0,0,0.07) 0px 1px 2px 0px, rgba(0,0,0,0.2) 0px 0px 1px 0px;
+    width: 228px;
+    text-align: left;
+
+    .DropDown_List{
+        margin: 2px;
+        margin-left: -1px;
+        margin-right: -1px;
+        background-color: rgb(255, 255, 255);
+        border-radius: 4px;
+
+        .DropDown_List_Content{
+            margin: 8px;
+            text-align: left;
+            height:2.5rem;
+
+            .Content_Title{
+                margin: 8px 8px 0px 8px;
+
+                .First_Line_Title{
+                    font-weight: 500;
+                }
+
+                .Second_Line_Title{
+                    margin-top: -4px;
+                    font-size: small;
+                }
+            }    
+        }
+
+        .DropDown_List_Content:hover{
+            background-color: rgb(245, 242, 242);
+        }
+    }  
+}
+
+.Display_Flex{
+    align-items: center;
+    display: flex;
+}
+
+.Search_Icon_CSS{
+    height: 1.3rem;
+    width: 1.3rem;
+}

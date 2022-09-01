@@ -1,0 +1,30 @@
+.Header_Container{
+    flex-direction: column;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+
+    .Header_Container_Navbar_Wrapper{
+        background: #fff;
+        width: 100%;
+        border-bottom: 1px solid transparent;
+        box-shadow: 0 1px 0 0 #dde0e4;
+        height: 56px;
+        justify-content: center;
+
+        .Header_Container_Navbar{
+            justify-content: space-between;
+            max-width: 100%;
+            width: 1152px;
+            padding-right: 16px;
+            padding-left: 16px;
+        }
+    }
+}
+
+.Display_Flex{
+    align-items: center;
+    display: flex;
+}
+
