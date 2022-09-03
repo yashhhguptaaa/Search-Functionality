@@ -1,16 +1,25 @@
-import { useEffect, useState, useCallback, useRef } from "react";
+import { useEffect, useRef } from "react";
 import SearchIcon from "../../assets/icons/Search_Icon.svg";
 import style from "./SearchBox.module.scss";
-import axios from "axios";
 
-export default function SearchBox(props: any) {
+interface ISearchBoxProps {
+    setSearchKeyword?: any;
+    optimizedFn?: any;
+    searchList?: any;
+    searchKeyword?: string;
+    onClickOutside?: any;
+    show?: boolean;
+}
+
+export default function SearchBox({
+    setSearchKeyword,
+    optimizedFn,
+    searchList,
+    searchKeyword = "",
+    onClickOutside,
+    show,
+}: ISearchBoxProps) {
     const ref = useRef(null);
-    const { onClickOutside } = props;
-    console.log("props:", props)
-
-    const [searchList, setSearchList] = useState([])
-    const [searchKeyword, setSearchKeyword] = useState("")
-
     useEffect(() => {
         const handleClickOutside = (event: any) => {
             // @ts-ignore: Unreachable code error
@@ -24,43 +33,16 @@ export default function SearchBox(props: any) {
         };
     }, [onClickOutside]);
 
-
-    const getTickerFromAPi = async (word: string) => {
-        console.log("word :", word)
-        const response = await axios.get(
-            `https://ticker-2e1ica8b9.now.sh/keyword/${word}`
-        );
-        // const ArraysofData = response.data.map((f: any) => [f.symbol + " ," + f.name]);
-        const FlatArray = [].concat(...response.data);
-        setSearchList(FlatArray);
-        console.log({ FlatArray });
-        // this.setState({ dataSource: FlatArray });
-    };
-
-    function debounce(delay: number) {
-        let inDebounce: NodeJS.Timeout | null;
-        return function (...args: any) {
-            // @ts-ignore: Unreachable code error
-            const context: any = this;
-            if (inDebounce) clearTimeout(inDebounce);
-            inDebounce = setTimeout((e: any) => getTickerFromAPi.call(context, args), delay)
-        }
-    }
-
-    const optimizedFn = useCallback(debounce(500), []);
-
     const handleSearch = (event: any) => {
         if (event.target.value.length >= 3) {
-            console.log("called");
             setSearchKeyword(event.target.value);
             optimizedFn(event.target.value);
-            // this.setState({ search: e }, () => getTickerFromAPi(event.target.value));
         }
     };
 
     return (
         <div ref={ref}>
-            <div className={`${style.Search_Box_Wrapper} ${props.show ? style.Focused_Container : ""}`}>
+            <div className={`${style.Search_Box_Wrapper} ${show ? style.Focused_Container : ""}`}>
                 <div className={`${style.Search_Box} ${style.Display_Flex}`}>
                     <img src={SearchIcon} className={style.Search_Icon_CSS} alt="Search Icon" />
                     <input
@@ -70,7 +52,7 @@ export default function SearchBox(props: any) {
                     />
                 </div>
             </div>
-            {props.show && (<div className={style.DropDown_List_Wrapper}>
+            {show && (<div className={style.DropDown_List_Wrapper}>
                 <div className={style.DropDown_List}>
                     {
                         searchList?.length

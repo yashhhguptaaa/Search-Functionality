@@ -1,0 +1,103 @@
+.Companies_List_Main_Container{
+    margin-top: 6rem;
+    margin-right: auto;
+    margin-bottom: 0px;
+    margin-left: auto;
+    max-width: 420px;
+    width: calc(100% - 64px);
+    display: flex;
+
+    .Indiviual_Company_Details_Wrapper{
+        box-shadow: 0 -1px 0 0 rgb(221 224 228 / 50%);
+
+        .Indiviual_Company_Details{
+            flex-grow: 0;
+            flex-shrink: 0;
+            flex-basis: 338px;
+
+            .Company_Symbol_Outer_Div{
+                height: 3rem;
+                width: 3rem;
+                background-color: #1f7ae0;
+                border-radius: 4px;
+                color: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+
+                .Company_Symbol_Text{
+                    margin: auto;
+                }
+            }
+
+            .Company_Name_Title{
+                margin-top: 0.75rem;
+                margin-left: 1rem;
+                margin-bottom: 1rem;
+                font-weight: 450;
+            }
+            .Company_Name_Title:hover{
+                font-weight: 350;
+            }
+        }
+    }   
+
+    .Button_Container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-top: 5rem;
+
+        .Previous_Record_Button{
+            background-color: rgba(83,91,98,.5);
+            border-radius: 6px;
+            color: #fff;
+            height: 40px;
+            // position: absolute;
+            // top: 45%;
+            transform: translateY(-50%);
+            width: 40px;
+            z-index: 3;
+    
+            .Button_Text{
+                font-size: 1.6rem;
+                font-weight: 600;
+            }
+        }
+    
+        .Previous_Record_Button:hover{    
+            background-color: rgba(83,91,98,.6);
+        }
+    }
+
+    .Previous_Button_Container{
+        margin-right: 1rem;
+    }
+}
+
+h2{
+    font-size: 18px;
+    font-stretch: normal;
+    font-style: normal;
+    color: #2f363f;
+    font-family: Graphik Web Medium,sans-serif;
+}
+
+button {
+    background: unset;
+    border: unset;
+    font-size: inherit;
+}
+
+
+.Display_Flex{
+    display: flex;
+}
+
+.Border_Bottom_Styling{
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: rgba(221, 224, 228, 0.5);
+}
