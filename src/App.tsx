@@ -8,7 +8,12 @@ import Loader from './components/loader/Loader';
 import { AppDetailsContext } from "./context";
 
 function App() {
-  const { isLoading }: any = useContext(AppDetailsContext);
+  let isLoading = false;
+  const contextObj: any = useContext(AppDetailsContext);
+  if (contextObj) {
+    isLoading = contextObj.isLoading;
+  }
+
   useEffect(() => {
     AOS.init();
     AOS.refresh();

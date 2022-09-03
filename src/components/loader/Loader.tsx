@@ -5,4 +5,4 @@ export default function Loader() {
     return (<div>
         <img src={LoaderGIF} className={style.LoaderGIF_Styling} alt="Smallcase Loader GIF" />
     </div>)
-}
+}   

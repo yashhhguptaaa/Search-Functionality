@@ -4,7 +4,15 @@ import Button from "../button/Button";
 import { AppDetailsContext } from "../../context";
 
 export default function CompaniesList() {
-    const { noOfRecords, currentPage, totalPages, nextPage, previousPage }: any = useContext(AppDetailsContext);
+    let noOfRecords: any = [], currentPage: number = 0, totalPages: number = 0, nextPage: Object = () => null, previousPage: Object = () => null;
+    const contextObj: any = useContext(AppDetailsContext);
+    if (contextObj) {
+        noOfRecords = contextObj.noOfRecords;
+        currentPage = contextObj.currentPage;
+        totalPages = contextObj.totalPages;
+        nextPage = contextObj.nextPage;
+        previousPage = contextObj.previousPage;
+    }
     return (
         <div data-aos="fade-up" data-aos-duration="500" className={style.Companies_List_Main_Container}>
             {currentPage !== 1 && noOfRecords.length > 0 ? <Button handleFunction={previousPage} type="Previous" /> : null}
