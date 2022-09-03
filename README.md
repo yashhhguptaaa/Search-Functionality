@@ -22,7 +22,9 @@
 
 6. Added test for all the components.
 
-7. Fully responsive and clean UI.
+7. ReactJS Accessibility: Accessibility is the necessary tool or ways in which a website can be made easy to access by the user with features like clickable buttons or dropdowns or spaces to write a comment and stuff. 
+
+8. Fully responsive and clean UI.
 
 ## Open-Source packages / libraries used:
 

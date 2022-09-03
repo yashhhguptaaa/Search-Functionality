@@ -48,6 +48,7 @@ export default function SearchBox({
                     <input
                         placeholder="Search by name or ticker"
                         className={style.Input_Search_Box}
+                        type="text"
                         onChange={handleSearch}
                     />
                 </div>
