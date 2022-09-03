@@ -53,16 +53,16 @@ export default function SearchBox({
                 </div>
             </div>
             {show && (<div className={style.DropDown_List_Wrapper}>
-                <div className={style.DropDown_List}>
+                <div data-aos="fade-up" className={style.DropDown_List}>
                     {
                         searchList?.length
                             ?
                             searchList.map((company: any, index: number) => {
                                 return (
-                                    <div key={index + company.symbol} className={style.DropDown_List_Content}>
+                                    <div key={index + company.symbol + company.name} className={style.DropDown_List_Content}>
                                         <div className={style.Content_Title}>
                                             <span className={style.First_Line_Title}>{company.symbol}</span>
-                                            <p className={style.Second_Line_Title}>{company.name.length > 25 ? company.name.substring(0, 25) + "..." : company.name}</p>
+                                            <p className={style.Second_Line_Title}>{company.name.length > 25 ? company.name.substring(0, 24) + "..." : company.name}</p>
                                         </div>
                                     </div>
                                 )

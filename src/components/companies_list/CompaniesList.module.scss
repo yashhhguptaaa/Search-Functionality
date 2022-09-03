@@ -43,38 +43,6 @@
             }
         }
     }   
-
-    .Button_Container{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        margin-top: 5rem;
-
-        .Previous_Record_Button{
-            background-color: rgba(83,91,98,.5);
-            border-radius: 6px;
-            color: #fff;
-            height: 40px;
-            // position: absolute;
-            // top: 45%;
-            transform: translateY(-50%);
-            width: 40px;
-            z-index: 3;
-    
-            .Button_Text{
-                font-size: 1.6rem;
-                font-weight: 600;
-            }
-        }
-    
-        .Previous_Record_Button:hover{    
-            background-color: rgba(83,91,98,.6);
-        }
-    }
-
-    .Previous_Button_Container{
-        margin-right: 1rem;
-    }
 }
 
 h2{
