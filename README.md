@@ -1,46 +1,31 @@
-# Getting Started with Create React App
+## Deployed Link:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[https://searching-red.vercel.app/](https://searching-red.vercel.app/)
 
-## Available Scripts
+## Technologies Used:
 
-In the project directory, you can run:
+1. React.js
+2. TypeScript
+3. Axios
 
-### `npm start`
+## Features:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. Debouncing: It is a programming practice used to ensure that time-consuming tasks do not fire so often, that it stalls the performance of the web page. For example, if the user types abc, the query goes to the api. Meanwhile, if the user types abcde before 200ms, then the previous API call would be canceled. And after 200ms, the API will call for the abcde.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+2. Pagination: The list of search results would show in a paginated view with 5 results per page.
 
-### `npm test`
+3. Previous and Next button to allow users to load the next set of results.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+4. The search results are coming from an api [https://ticker-2e1ica8b9.now.sh/keyword/abc](https://ticker-2e1ica8b9.now.sh/keyword/abc) .
 
-### `npm run build`
+5. Added animation for different components using AOS.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+6. Added test for all the components.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+7. Fully responsive and clean UI.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Open-Source packages / libraries used:
 
-### `npm run eject`
+1. [sass](https://github.com/sass/sass) : I've used sass for all the css in this project.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+2. [AOS](https://github.com/michalsnik/aos) : I've used this for adding animation like fade-up, fade-down etc.
