@@ -12,19 +12,21 @@
 
 1. Debouncing: It is a programming practice used to ensure that time-consuming tasks do not fire so often, that it stalls the performance of the web page. For example, if the user types abc, the query goes to the api. Meanwhile, if the user types abcde before 200ms, then the previous API call would be canceled. And after 200ms, the API will call for the abcde.
 
-2. Pagination: The list of search results would show in a paginated view with 5 results per page.
+2. Abort Controller for cancelling previous request.
 
-3. Previous and Next button to allow users to load the next set of results.
+3. Pagination: The list of search results would show in a paginated view with 5 results per page.
 
-4. The search results are coming from an api [https://ticker-2e1ica8b9.now.sh/keyword/abc](https://ticker-2e1ica8b9.now.sh/keyword/abc) .
+4. Previous and Next button to allow users to load the next set of results.
 
-5. Added animation for different components using AOS.
+5. The search results are coming from an api [https://ticker-2e1ica8b9.now.sh/keyword/abc](https://ticker-2e1ica8b9.now.sh/keyword/abc) .
 
-6. Added test for all the components.
+6. Added animation for different components using AOS.
 
-7. ReactJS Accessibility: Accessibility is the necessary tool or ways in which a website can be made easy to access by the user with features like clickable buttons or dropdowns or spaces to write a comment and stuff. 
+7. Added test for all the components.
 
-8. Fully responsive and clean UI.
+8. ReactJS Accessibility: Accessibility is the necessary tool or ways in which a website can be made easy to access by the user with features like clickable buttons or dropdowns or spaces to write a comment and stuff. 
+
+9. Fully responsive and clean UI.
 
 ## Open-Source packages / libraries used:
 

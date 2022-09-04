@@ -6,7 +6,7 @@ import { AppDetailsContext } from "../../context";
 
 export default function Navbar() {
     let [showInfo1, setShowInfo1] = useState<boolean>(false);
-    let setSearchKeyword = () => null, optimizedFn = () => null, searchList: any = [], searchKeyword = "";
+    let setSearchKeyword = () => null, optimizedFn = () => null, searchList: any = [], searchKeyword = "", cancelRequest = () => null;
 
     const contextObj: any = useContext(AppDetailsContext);
     if (contextObj) {
@@ -14,6 +14,7 @@ export default function Navbar() {
         optimizedFn = contextObj.optimizedFn;
         searchList = contextObj.searchList;
         searchKeyword = contextObj.searchKeyword;
+        cancelRequest = contextObj.cancelRequest;
     }
 
     return (
@@ -22,7 +23,7 @@ export default function Navbar() {
                 <div className={`${style.Header_Container_Navbar} ${style.Display_Flex}`}>
                     <img src={SmallcaseIcon} className={style.Smallcase_Icon_Image} alt="Smallcase Icon" />
                     <div onClick={() => setShowInfo1(true)}>
-                        <SearchBox setSearchKeyword={setSearchKeyword} optimizedFn={optimizedFn} searchList={searchList} searchKeyword={searchKeyword} show={showInfo1} onClickOutside={() => { setShowInfo1(false) }} />
+                        <SearchBox setSearchKeyword={setSearchKeyword} optimizedFn={optimizedFn} cancelRequest={cancelRequest} searchList={searchList} searchKeyword={searchKeyword} show={showInfo1} onClickOutside={() => { setShowInfo1(false) }} />
                     </div>
                 </div>
             </div>

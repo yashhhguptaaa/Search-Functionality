@@ -5,6 +5,7 @@ import style from "./SearchBox.module.scss";
 interface ISearchBoxProps {
     setSearchKeyword?: any;
     optimizedFn?: any;
+    cancelRequest?: any;
     searchList?: any;
     searchKeyword?: string;
     onClickOutside?: any;
@@ -14,6 +15,7 @@ interface ISearchBoxProps {
 export default function SearchBox({
     setSearchKeyword,
     optimizedFn,
+    cancelRequest,
     searchList,
     searchKeyword = "",
     onClickOutside,
@@ -35,6 +37,7 @@ export default function SearchBox({
 
     const handleSearch = (event: any) => {
         if (event.target.value.length >= 3) {
+            cancelRequest();
             setSearchKeyword(event.target.value);
             optimizedFn(event.target.value);
         }

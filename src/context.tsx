@@ -1,8 +1,9 @@
-import { useState, createContext, useCallback } from 'react';
+import { useState, createContext, useCallback, useRef } from 'react';
 import axios from "axios";
 const AppDetailsContext = createContext(null);
 
 const AppDetailsProvider: React.FC<React.ReactNode> = ({ children }: any) => {
+    const abortController: any = useRef(null);
     const [currentPage, setCurrentPage] = useState(1);
     const [noOfRecords, setNoOfRecords] = useState<any[]>([]);
     const [searchList, setSearchList] = useState<any[]>([]);
@@ -40,18 +41,29 @@ const AppDetailsProvider: React.FC<React.ReactNode> = ({ children }: any) => {
     }
 
     const getTickerFromAPi = async (word: string) => {
-        const response = await axios.get(
-            `https://ticker-2e1ica8b9.now.sh/keyword/${word}`
-        );
-        const FlatArray = [].concat(...response.data);
-        setSearchList(FlatArray);
-        if (5 <= FlatArray.length) {
-            setNoOfRecords(FlatArray.slice(0, 5))
-        } else {
-            setNoOfRecords(FlatArray.slice(0, FlatArray.length))
+        try {
+            abortController.current = new AbortController();
+            const response = await axios.get(
+                `https://ticker-2e1ica8b9.now.sh/keyword/${word}`, {
+                signal: abortController.current.signal
+            }
+            );
+            const FlatArray = [].concat(...response.data);
+            setSearchList(FlatArray);
+            if (5 <= FlatArray.length) {
+                setNoOfRecords(FlatArray.slice(0, 5))
+            } else {
+                setNoOfRecords(FlatArray.slice(0, FlatArray.length))
+            }
+            setCurrentPage(1);
+        } catch (error: any) {
+            if (error.name === "CanceledError") {
+                console.log("Previous fetch request canceled");
+            }
         }
-        setCurrentPage(1);
     };
+
+    const cancelRequest = () => abortController.current && abortController.current.abort();
 
     function debounce(delay: number) {
         let inDebounce: NodeJS.Timeout | null;
@@ -63,7 +75,7 @@ const AppDetailsProvider: React.FC<React.ReactNode> = ({ children }: any) => {
         }
     }
 
-    const optimizedFn = useCallback(debounce(200), []);
+    const optimizedFn = useCallback(debounce(500), []);
 
     setTimeout(() => setIsLoading(false), 1000);
 
@@ -77,6 +89,7 @@ const AppDetailsProvider: React.FC<React.ReactNode> = ({ children }: any) => {
                 noOfRecords,
                 totalPages,
                 optimizedFn,
+                cancelRequest,
                 searchList,
                 setSearchKeyword,
                 searchKeyword,
