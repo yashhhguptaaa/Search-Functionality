@@ -20,7 +20,7 @@
 
 5. Previous and Next button to allow users to load the next set of results.
 
-6. The search results are coming from an api [https://ticker-2e1ica8b9.now.sh/keyword/abc](https://ticker-2e1ica8b9.now.sh/keyword/abc) .
+6. The search results are coming from an api [https://search-functionality-backend.vercel.app/](https://search-functionality-backend.vercel.app/) .
 
 7. Added animation for different components using AOS.
 
