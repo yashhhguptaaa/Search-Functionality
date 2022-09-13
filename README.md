@@ -14,19 +14,21 @@
 
 2. Abort Controller for cancelling previous request.
 
-3. Pagination: The list of search results would show in a paginated view with 5 results per page.
+3. Pagination: The list of search results would show in a paginated view with 5 results per page on server side.
 
-4. Previous and Next button to allow users to load the next set of results.
+4. Caching: This would cache older searches.
 
-5. The search results are coming from an api [https://ticker-2e1ica8b9.now.sh/keyword/abc](https://ticker-2e1ica8b9.now.sh/keyword/abc) .
+5. Previous and Next button to allow users to load the next set of results.
 
-6. Added animation for different components using AOS.
+6. The search results are coming from an api [https://ticker-2e1ica8b9.now.sh/keyword/abc](https://ticker-2e1ica8b9.now.sh/keyword/abc) .
 
-7. Added test for all the components.
+7. Added animation for different components using AOS.
 
-8. ReactJS Accessibility: Accessibility is the necessary tool or ways in which a website can be made easy to access by the user with features like clickable buttons or dropdowns or spaces to write a comment and stuff. 
+8. Added test for all the components.
 
-9. Fully responsive and clean UI.
+9. ReactJS Accessibility: Accessibility is the necessary tool or ways in which a website can be made easy to access by the user with features like clickable buttons or dropdowns or spaces to write a comment and stuff. 
+
+10. Fully responsive and clean UI.
 
 ## Open-Source packages / libraries used:
 
