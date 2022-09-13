@@ -15,7 +15,7 @@ export default function CompaniesList() {
     }
     return (
         <div data-aos="fade-up" data-aos-duration="500" className={style.Companies_List_Main_Container}>
-            {currentPage !== 1 && noOfRecords.length > 0 ? <Button handleFunction={previousPage} type="Previous" /> : null}
+            {currentPage !== 1 && noOfRecords.length > 0 ? <Button handleFunction={previousPage} type="PREVIOUS" /> : null}
             <div>
                 <h2 className={style.Investment_Companies_Title}>Investment Companies</h2>
                 {
@@ -31,7 +31,7 @@ export default function CompaniesList() {
                     }) : <div className={style.Indiviual_Company_Details_Wrapper}><i>No Search Result</i></div>
                 }
             </div>
-            {currentPage !== totalPages && noOfRecords.length > 0 ? <Button handleFunction={nextPage} type="Next" /> : null}
+            {currentPage !== totalPages && noOfRecords.length > 0 ? <Button handleFunction={nextPage} type="NEXT" /> : null}
         </div>
     )
 }

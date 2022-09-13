@@ -4,25 +4,57 @@ const AppDetailsContext = createContext(null);
 
 const AppDetailsProvider: React.FC<React.ReactNode> = ({ children }: any) => {
     const abortController: any = useRef(null);
+
+    // These states are responsible to maintain data in Pagination Operation.
     const [currentPage, setCurrentPage] = useState(1);
     const [noOfRecords, setNoOfRecords] = useState<any[]>([]);
+
+    // These states are responsible to maintain data in Search Bar Operation.
+    const [loadMoreRecordNumber, setLoadMoreRecordNumber] = useState(1);
     const [searchList, setSearchList] = useState<any[]>([]);
+
+    // Here, search keyword is stored.
     const [searchKeyword, setSearchKeyword] = useState("");
-    const totalNoOfRecords: any = searchList;
-    const totalPages = Math.ceil(searchList.length / 5);
+    const [totalPages, setTotalPages] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
+
 
     const nextPage = () => {
         let tempCurrentPage = currentPage;
         if (tempCurrentPage < totalPages) {
             tempCurrentPage += 1;
-            setCurrentPage(tempCurrentPage);
 
-            if ((tempCurrentPage - 1) * 5 + 5 <= searchList.length) {
-                setNoOfRecords(searchList.slice((tempCurrentPage - 1) * 5, (tempCurrentPage - 1) * 5 + 5))
+            const requestingKey: string = `${searchKeyword}${tempCurrentPage}`;
+            if (localStorage.getItem(requestingKey)) {
+                const cachedSearchResult: any = JSON.parse(localStorage.getItem(requestingKey) || "");
+                setNoOfRecords(cachedSearchResult.records);
+                setTotalPages(Math.ceil(cachedSearchResult.totalRecords / 5));
             } else {
-                setNoOfRecords(searchList.slice((tempCurrentPage - 1) * 5, searchList.length))
+                getTickerFromAPi(searchKeyword, tempCurrentPage);
             }
+            setCurrentPage(tempCurrentPage);
+        }
+    }
+
+    const loadMore = () => {
+        let tempCurrentPage = loadMoreRecordNumber;
+        if (tempCurrentPage < totalPages) {
+            tempCurrentPage += 1;
+
+            const requestingKey: string = `${searchKeyword}${tempCurrentPage}`;
+            if (localStorage.getItem(requestingKey)) {
+                const cachedSearchResult: any = JSON.parse(localStorage.getItem(requestingKey) || "");
+                if (tempCurrentPage > 1) {
+                    setSearchList([...searchList, ...cachedSearchResult.records])
+                }
+                else {
+                    setSearchList(cachedSearchResult.records);
+                }
+                setTotalPages(Math.ceil(cachedSearchResult.totalRecords / 5));
+            } else {
+                getTickerFromAPi(searchKeyword, tempCurrentPage, true);
+            }
+            setLoadMoreRecordNumber(tempCurrentPage);
         }
     }
 
@@ -30,32 +62,45 @@ const AppDetailsProvider: React.FC<React.ReactNode> = ({ children }: any) => {
         let tempCurrentPage = currentPage;
         if (tempCurrentPage > 1) {
             tempCurrentPage -= 1;
-            setCurrentPage(tempCurrentPage);
-
-            if ((tempCurrentPage - 1) * 5 + 5 <= totalNoOfRecords.length) {
-                setNoOfRecords(totalNoOfRecords.slice((tempCurrentPage - 1) * 5, (tempCurrentPage - 1) * 5 + 5))
+            const requestingKey: string = `${searchKeyword}${tempCurrentPage}`;
+            if (localStorage.getItem(requestingKey)) {
+                const cachedSearchResult: any = JSON.parse(localStorage.getItem(requestingKey) || "");
+                setNoOfRecords(cachedSearchResult.records);
+                setTotalPages(Math.ceil(cachedSearchResult.totalRecords / 5));
             } else {
-                setNoOfRecords(totalNoOfRecords.slice((tempCurrentPage - 1) * 5, totalNoOfRecords.length))
+                getTickerFromAPi(searchKeyword, tempCurrentPage);
             }
+            setCurrentPage(tempCurrentPage);
         }
     }
 
-    const getTickerFromAPi = async (word: string) => {
+    const getTickerFromAPi = async (word: string = searchKeyword, searchPageNumber: number = currentPage, loadMoreButtonCheck: boolean = false) => {
         try {
+            const requestingKey: string = `${word}${searchPageNumber}`;
+
             abortController.current = new AbortController();
-            const response = await axios.get(
-                `https://ticker-2e1ica8b9.now.sh/keyword/${word}`, {
+            const response = await axios.post(
+                `https://search-functionality-backend.vercel.app/search_stock/${searchPageNumber}`, {
+                keyword: word
+            }, {
                 signal: abortController.current.signal
             }
             );
-            const FlatArray = [].concat(...response.data);
-            setSearchList(FlatArray);
-            if (5 <= FlatArray.length) {
-                setNoOfRecords(FlatArray.slice(0, 5))
-            } else {
-                setNoOfRecords(FlatArray.slice(0, FlatArray.length))
+            if (response.status === 200) {
+                setTotalPages(Math.ceil(response.data.totalRecords / 5));
+
+                if (!loadMoreButtonCheck && searchPageNumber === 1) {
+                    setNoOfRecords(response.data.records);
+                }
+
+                if (loadMoreButtonCheck && searchPageNumber > 1) {
+                    setSearchList([...searchList, ...response.data.records])
+                }
+                else {
+                    setSearchList(response.data.records);
+                }
+                localStorage.setItem(requestingKey, JSON.stringify(response.data));
             }
-            setCurrentPage(1);
         } catch (error: any) {
             if (error.name === "CanceledError") {
                 console.log("Previous fetch request canceled");
@@ -71,7 +116,7 @@ const AppDetailsProvider: React.FC<React.ReactNode> = ({ children }: any) => {
             // @ts-ignore: Unreachable code error
             const context: any = this;
             if (inDebounce) clearTimeout(inDebounce);
-            inDebounce = setTimeout((e: any) => getTickerFromAPi.call(context, args), delay)
+            inDebounce = setTimeout((e: any) => getTickerFromAPi.call(context, ...args), delay)
         }
     }
 
@@ -93,7 +138,9 @@ const AppDetailsProvider: React.FC<React.ReactNode> = ({ children }: any) => {
                 searchList,
                 setSearchKeyword,
                 searchKeyword,
-                isLoading
+                isLoading,
+                loadMore,
+                loadMoreRecordNumber
             }}>
             {children}
         </AppDetailsContext.Provider>

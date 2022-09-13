@@ -8,6 +8,7 @@
     width: 228px;
     margin: 0px;
     text-align: left;
+   
 
     .Search_Box{
         justify-content: flex-start;
@@ -34,12 +35,12 @@
     max-height: 264px;
     overflow-y: auto;
     overflow-x: hidden;
-    z-index: 4;
     background-color: rgb(255, 255, 255);
     border-radius: 0px 0px 4px 4px;
     box-shadow: rgba(0,0,0,0.15) 0px 4px 16px 0px, rgba(0,0,0,0.07) 0px 1px 2px 0px, rgba(0,0,0,0.2) 0px 0px 1px 0px;
     width: 228px;
     text-align: left;
+    opacity: 2;
 
     .DropDown_List{
         margin: 2px;
@@ -53,7 +54,7 @@
             text-align: left;
             height:2.5rem;
             cursor: pointer;
-
+    
             .Content_Title{
                 margin: 8px 8px 0px 8px;
 

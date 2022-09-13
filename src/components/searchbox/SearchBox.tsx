@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import SearchIcon from "../../assets/icons/Search_Icon.svg";
 import style from "./SearchBox.module.scss";
+import Button from "../button/Button"
 
 interface ISearchBoxProps {
     setSearchKeyword?: any;
@@ -10,6 +11,10 @@ interface ISearchBoxProps {
     searchKeyword?: string;
     onClickOutside?: any;
     show?: boolean;
+    loadMoreRecordNumber?: number;
+    totalPages?: number;
+    noOfRecords?: any;
+    handleFunction?: Object;
 }
 
 export default function SearchBox({
@@ -20,6 +25,10 @@ export default function SearchBox({
     searchKeyword = "",
     onClickOutside,
     show,
+    loadMoreRecordNumber,
+    totalPages,
+    noOfRecords,
+    handleFunction
 }: ISearchBoxProps) {
     const ref = useRef(null);
     useEffect(() => {
@@ -39,7 +48,7 @@ export default function SearchBox({
         if (event.target.value.length >= 3) {
             cancelRequest();
             setSearchKeyword(event.target.value);
-            optimizedFn(event.target.value);
+            optimizedFn(event.target.value, 1);
         }
     };
 
@@ -61,16 +70,20 @@ export default function SearchBox({
                     {
                         searchList?.length
                             ?
-                            searchList.map((company: any, index: number) => {
-                                return (
-                                    <div key={index + company.symbol + company.name} className={style.DropDown_List_Content}>
-                                        <div className={style.Content_Title}>
-                                            <span className={style.First_Line_Title}>{company.symbol}</span>
-                                            <p className={style.Second_Line_Title}>{company.name.length > 25 ? company.name.substring(0, 24) + "..." : company.name}</p>
+                            (<div>
+                                {searchList.map((company: any, index: number) => {
+                                    return (
+                                        <div key={index + company.symbol + company.name} className={style.DropDown_List_Content}>
+                                            <div className={style.Content_Title}>
+                                                <span className={style.First_Line_Title}>{company.symbol}</span>
+                                                <p className={style.Second_Line_Title}>{company.name.length > 25 ? company.name.substring(0, 24) + "..." : company.name}</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                )
-                            })
+                                    )
+                                })}
+                                {loadMoreRecordNumber !== totalPages && noOfRecords.length > 0 ? <Button handleFunction={handleFunction} type="LOADMORE" /> : null}
+                            </div>
+                            )
                             :
                             searchKeyword.length < 4
                                 ?
