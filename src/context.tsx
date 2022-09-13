@@ -89,7 +89,7 @@ const AppDetailsProvider: React.FC<React.ReactNode> = ({ children }: any) => {
             if (response.status === 200) {
                 setTotalPages(Math.ceil(response.data.totalRecords / 5));
 
-                if (!loadMoreButtonCheck && searchPageNumber === 1) {
+                if (!loadMoreButtonCheck) {
                     setNoOfRecords(response.data.records);
                 }
 
